@@ -1,0 +1,128 @@
+LAB-11
+==========================================
+3.7
+==========================================
+home.php
+==========================================
+<?php
+session_start();
+
+if(!isset($_SESSION["name"]))
+{
+    header("Location: login.php");
+    exit();
+}
+
+echo "<h2>Welcome ".$_SESSION["name"]."</h2>";
+?>
+
+<a href="logout.php">Logout</a>
+==========================================
+login.php
+==========================================
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<form 
+method="post">
+    Username:
+    <input type="text" name="name">
+    <input type="submit" name="btn" value="Login">
+</form>
+</body>
+</html>
+
+
+<?php
+session_start();
+
+if(isset($_POST['btn']))
+{
+    $_SESSION["name"] = $_POST["name"];
+    header("Location: home.php");
+    exit();
+}
+?>
+==========================================
+logout.php
+==========================================
+<?php
+session_start();
+
+session_destroy();
+
+header("Location: login.php");
+exit();
+?>
+==========================================
+==========================================
+3.8
+==========================================
+<?php
+
+if(isset($_COOKIE["user"]))
+{
+    echo "Welcome Back! Repeated User";
+}
+else
+{
+    setcookie("user", "Vyom", time()+3600);
+    echo "Welcome! New User";
+}
+
+?>
+==========================================
+==========================================
+3.9
+==========================================
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remember Me</title>
+</head>
+<body>
+
+<?php
+
+$username = "";
+$password = "";
+
+if(isset($_COOKIE["username"]))
+{
+    $username = $_COOKIE["username"];
+}
+
+if(isset($_COOKIE["password"]))
+{
+    $password = $_COOKIE["password"];
+}
+
+if(isset($_POST["btn"]))
+{
+    setcookie("username", $_POST["username"], time()+3600);
+    setcookie("password", $_POST["password"], time()+3600);
+
+
+}
+
+?>
+
+<form method="post">
+
+Username:
+<input type="text" name="username" value="<?php echo $username; ?>">
+<br><br>
+
+Password:
+<input type="password" name="password" value="<?php echo $password; ?>">
+<br><br>
+
+<input type="submit" name="btn" value="Login">
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+LAB-12
+==================================================
+5.1
+==================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Demo</title>
+</head>
+<body>
+    <button onclick="loadtextfile()">Load Text File</button>
+    <p id="display"></p>
+    <script>
+        function loadtextfile()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","data.txt",true);
+
+            xhr.onreadystatechange = function()
+            {
+                if(xhr.readyState == 4 && xhr.status == 200)
+            {
+                document.getElementById('display').innerHTML = xhr.responseText;
+            }
+            }
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
+==================================================
+5.2
+==================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest with Callback</title>
+</head>
+<body>
+
+    <button onclick="loadTextFile()">Load Text File</button>
+    <p id="display"></p>
+
+    <script>
+        var xhr;
+
+        function loadTextFile() {
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = showData;   // Callback function
+            xhr.open("GET", "data.txt", true);
+            xhr.send();
+        }
+
+        function showData() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById("display").innerHTML = xhr.responseText;
+            }
+        }
+    </script>
+
+</body>
+</html>
+==================================================
+data.txt = text file
+==================================================
+hello this is text file
+==================================================

@@ -1,0 +1,102 @@
+1.Write a PHP code for sorting an array entered by user. 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sort an Array</title>
+</head>
+<body>
+
+<form method="post">
+    Enter array elements (comma-separated): <br><br>
+    <input type="text" name="array" required>
+    <input type="submit" name="submit" value="Sort">
+</form>
+
+<?php
+if (isset($_POST['submit'])) {
+    
+    $input = $_POST['array'];
+
+        $arr = explode(",", $input);
+
+        $arr = array_map('trim', $arr);
+
+    
+    sort($arr);
+
+    echo "<h3>Sorted Array:</h3>";
+    foreach ($arr as $value) {
+        echo $value . " ";
+    }
+}
+?>
+
+</body>
+</html>
+
+2.Write a program to perform following array functions: 
+1) array_change_key_case($var, CASE_LOWER/CASE_UPPER). 
+2) array_chunk($var,size) //array of months 
+3) array_count_values() 
+4) array_pop() 
+5) array_push() 
+6) array_unshift() 
+7) array_shift()
+
+<!-- array_change_key_case() -->
+
+<?php 
+
+    $a = array("Name"=>"PRASHANTH","City"=>"Rajkot"); 
+    print_r(array_change_key_case($a, CASE_LOWER)); 
+
+?>
+
+<!-- array_chunk() -->
+
+<?php 
+
+    $months = array("Jan","Feb","Mar","Apr","May","Jun"); 
+    print_r(array_chunk($months,2)); 
+    
+?>
+
+<!-- array_count_values() -->
+
+<?php 
+    $a = array("A","B","A","C","B","A"); 
+    print_r(array_count_values($a)); 
+?>
+
+<!-- array_pop() -->
+
+<?php 
+    $a = array("Red","Green","Blue"); 
+    array_pop($a); 
+    print_r($a); 
+?>
+
+<!-- array_push() -->
+
+<?php 
+    $a = array("Red","Green"); 
+    array_push($a,"Blue"); 
+    print_r($a); 
+?>
+
+<!-- array_unshift() -->
+
+<?php 
+    $a = array("Green","Blue"); 
+    array_unshift($a,"Red"); 
+    print_r($a); 
+?>
+
+<!-- array_shift() -->
+
+<?php 
+    $a = array("Red","Green","Blue"); 
+    array_shift($a); 
+    print_r($a); 
+?>

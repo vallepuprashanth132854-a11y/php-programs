@@ -1,0 +1,116 @@
+3.1
+=======================================================
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Cookie</title>
+</head>
+
+<body>
+
+    <form method="post">
+        Enter Name:
+        <input type="text" name="name">
+        <input type="submit" name="btn" value="Save">
+    </form>
+
+</body>
+
+</html>
+
+    
+    
+    <?php
+    if (isset($_POST['btn'])) {
+        $name = $_POST['name'];
+
+        setcookie("username", $name, time() + 3600);
+        echo("COOKIE CREATED");
+    }
+    ?>
+=======================================================
+3.2
+=======================================================
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Read Cookie</title>
+</head>
+
+<body>
+
+    <?php
+
+    if (isset($_COOKIE["username"])) {
+        echo "Cookie Value: " . $_COOKIE["username"];
+    } else {
+        echo "Cookie Not Found!";
+    }
+
+    ?>
+
+</body>
+
+</html>
+=======================================================
+3.3
+=======================================================
+<?php
+
+setcookie("username", "Vyom", time()+3600);
+
+header("Location: 3.2.php");
+
+exit();
+
+?>
+=======================================================
+3.4
+=======================================================
+<?php
+
+setcookie("username", "", time() - 3600);
+
+echo "Cookie Deleted ";
+
+?>
+=======================================================
+3.5
+=======================================================
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Create</title>
+</head>
+<body>
+
+<form method="post">
+    Enter Name:
+    <input type="text" name="name">
+    <input type="submit" name="btn" value="Submit">
+</form>
+</body>
+</html>
+
+<?php
+
+session_start();
+
+if(isset($_POST['btn']))
+{
+    $_SESSION["name"] = $_POST["name"];
+    header("Location: welcome.php");
+}
+?>
+=======================================================
+3.6
+=======================================================
+<?php
+session_start();
+echo("HELLO CLASS IN THE SESSION OF PHP".$_SESSION['']);
+session_destroy();
+?>
+=======================================================
+

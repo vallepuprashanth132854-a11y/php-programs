@@ -1,0 +1,110 @@
+===============================================================
+1.7 Write a PHP program to include a file using include and require function
+Note : Create Header and footer file separate and use include or require function to add content.
+===============================================================
+
+HEADER:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> STUDENT MANAGEMENT SYSTEM(THIS IS HEADER FILE) </h2>
+</body>
+</html>
+
+FOOTER:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>WELCOME(THIS IS FOOTER FILE)</p>
+</body>
+</html>
+
+INDEX:
+
+<?php
+include ("header.php");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>HELLO(this is index file)</p>
+</body>
+</html>
+
+<?php
+require ("footer.php");
+?>
+=======================================================
+=======================================================
+
+=======================================================
+
+2.1 Write a PHP code to create numeric array for Monday to Saturday,
+associative array for month with total days of month such as
+January=>30,February=>28 upto December and multidimensional array
+for laptop along with company name inside that model and price(any
+two companies).
+
+=======================================================
+<?php
+
+    //numeric array
+
+    $day = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    print_r($day);
+
+    echo "<br><br>";
+
+    //Associative array
+
+    $month = array(
+        "January" => 31,
+        "February" => 28,
+        "March" => 31,
+        "April" => 30,
+        "May" => 31,
+        "June" => 30,
+        "July" => 31,
+        "August" => 31,
+        "September" => 30,
+        "October" => 31,
+        "November" => 30,
+        "December" => 31
+    );
+    print_r($month);
+
+    echo "<br><br>";
+
+    //Multidimantion array
+
+    $laptop = array(
+        "Apex" => array(
+            "model" => "apex1",
+            "price" => "80000"
+        ),
+        "Samsung" => array(
+            "model" => "S10 pro",
+            "price" => "300000"
+        )
+    );
+    print_r($laptop);
+?>
+======================================================
