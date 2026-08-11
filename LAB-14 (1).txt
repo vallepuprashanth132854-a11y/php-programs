@@ -1,0 +1,231 @@
+========================================================================
+ TASK 1: Navigation Menu with jQuery AJAX Dynamic Content Loading (PHP)
+========================================================================
+
+--------------------------------------------------------------
+FILE 1: index.php
+(Main page with navigation menu + container for AJAX content)
+--------------------------------------------------------------
+
+<?php
+// index.php - Main page
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dynamic Navigation Menu - AJAX Demo</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    nav { background: #2c3e50; padding: 10px; }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+    nav ul li { margin-right: 20px; }
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+    nav ul li a:hover, nav ul li a.active {
+        background: #1abc9c;
+    }
+    #content {
+        padding: 30px;
+        min-height: 300px;
+    }
+    #loading {
+        display: none;
+        color: #888;
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <ul id="nav-menu">
+        <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#" class="nav-link" data-section="blog">Blog Posts</a></li>
+        <li><a href="#" class="nav-link" data-section="products">Products</a></li>
+        <li><a href="#" class="nav-link" data-section="contact">Contact</a></li>
+    </ul>
+</nav>
+
+<p id="loading">Loading...</p>
+<div id="content">
+    <h2>Welcome to our Website</h2>
+    <p>Click a menu item above to load content dynamically without refreshing the page.</p>
+</div>
+
+<script>
+$(document).ready(function() {
+
+    $('.nav-link').on('click', function(e) {
+        e.preventDefault();
+
+        // Highlight active menu item
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+
+        var section = $(this).data('section');
+
+        // Show loading indicator
+        $('#loading').show();
+        $('#content').fadeOut(100);
+
+        // AJAX request to fetch section content from server
+        $.ajax({
+            url: 'load_content.php',
+            type: 'GET',
+            data: { section: section },
+            dataType: 'html',
+            success: function(response) {
+                $('#content').html(response).fadeIn(300);
+            },
+            error: function(xhr, status, error) {
+                $('#content').html('<p>Sorry, something went wrong loading this section.</p>').fadeIn(300);
+            },
+            complete: function() {
+                $('#loading').hide();
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
+
+
+--------------------------------------------------------------
+FILE 2: load_content.php
+(Server-side script that returns HTML/data for the requested section)
+--------------------------------------------------------------
+
+<?php
+// load_content.php - Handles AJAX requests and returns section content
+
+header('Content-Type: text/html; charset=UTF-8');
+
+// Get the requested section, default to 'home'
+$section = isset($_GET['section']) ? $_GET['section'] : 'home';
+
+// Example: pretend "database" of blog posts and products
+$blogPosts = [
+    ['title' => 'Getting Started with PHP', 'excerpt' => 'Learn the basics of PHP scripting for the web.'],
+    ['title' => 'Mastering jQuery AJAX', 'excerpt' => 'How to load content dynamically without page reloads.'],
+    ['title' => 'Responsive Design Tips', 'excerpt' => 'Make your website look great on every device.'],
+];
+
+$products = [
+    ['name' => 'Wireless Mouse', 'price' => '$19.99'],
+    ['name' => 'Mechanical Keyboard', 'price' => '$59.99'],
+    ['name' => 'USB-C Hub', 'price' => '$24.99'],
+];
+
+switch ($section) {
+
+    case 'about':
+        echo '<h2>About Us</h2>';
+        echo '<p>We are a small team dedicated to building great web experiences using PHP, jQuery, and AJAX.</p>';
+        break;
+
+    case 'blog':
+        echo '<h2>Latest Blog Posts</h2>';
+        foreach ($blogPosts as $post) {
+            echo '<div class="blog-post">';
+            echo '<h3>' . htmlspecialchars($post['title']) . '</h3>';
+            echo '<p>' . htmlspecialchars($post['excerpt']) . '</p>';
+            echo '</div><hr>';
+        }
+        break;
+
+    case 'products':
+        echo '<h2>Our Products</h2>';
+        echo '<ul>';
+        foreach ($products as $product) {
+            echo '<li>' . htmlspecialchars($product['name']) . ' - ' . htmlspecialchars($product['price']) . '</li>';
+        }
+        echo '</ul>';
+        break;
+
+    case 'contact':
+        echo '<h2>Contact Us</h2>';
+        echo '<p>Email: support@example.com<br>Phone: (123) 456-7890</p>';
+        break;
+
+    case 'home':
+    default:
+        echo '<h2>Welcome to our Website</h2>';
+        echo '<p>This content was loaded dynamically using jQuery and AJAX, without refreshing the page.</p>';
+        break;
+}
+?>
+
+
+========================================================================
+ TASK 2: Set Background Color of Selected HTML Elements to Red (jQuery)
+========================================================================
+
+--------------------------------------------------------------
+FILE 3: red_background.php
+(HTML elements: paragraphs, headings, buttons - turned red via jQuery)
+--------------------------------------------------------------
+
+<?php
+// red_background.php - Demonstrates changing background color with jQuery
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>jQuery - Set Background Color to Red</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    p, h1, h2, button { padding: 8px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1 id="main-heading">This is a Heading</h1>
+<h2 class="sub-heading">This is a Sub-heading</h2>
+
+<p class="text">This is the first paragraph.</p>
+<p class="text">This is the second paragraph.</p>
+
+<button id="action-btn">Click Me</button>
+<button class="action-btn">Another Button</button>
+
+<br><br>
+<button id="trigger">Turn Elements Red</button>
+
+<script>
+$(document).ready(function() {
+
+    $('#trigger').on('click', function() {
+        // Select specific elements: headings, paragraphs, buttons
+        $('#main-heading, .sub-heading, .text, #action-btn, .action-btn')
+            .css('background-color', 'red');
+    });
+
+});
+</script>
+
+</body>
+</html>
+
+========================================================================
+ NOTES
+========================================================================
+- Place index.php and load_content.php in the same folder on a PHP server
+  (e.g. XAMPP/WAMP htdocs, or any PHP-enabled hosting) to run Task 1.
+- Place red_background.php in the same/any folder to run Task 2.
+- Both examples use the jQuery CDN, so an internet connection is required
+  when viewing the pages (or download jquery.min.js locally instead).
